@@ -9,19 +9,6 @@
 #    export TERM=xterm-256color
 #fi
 
-# Up-front dotfiles configuration
-# Not part of `load_dotfiles` because it must be sourced before anything else
-# to be sure that commands like `brew` (when installed in a custom location)
-# are already added to the PATH.
-[ -r $HOME/.dotfilesrc ] && source $HOME/.dotfilesrc;
-
-# todo export PATH=.git/safe/../../bin:./bin:$HOME/.dotfiles/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:$HOME/.dotfiles/color/base16-shell
-
-# base-16
-BASE16_THEME="eighties"
-BASE16_SHELL="$HOME/.dotfiles/color/base16-shell/base16-$BASE16_THEME.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
 # shortcut to this dotfiles path is $BASH
 export BASH=$HOME/.dotfiles
 export DOTFILES=$HOME/.dotfiles
@@ -29,38 +16,37 @@ export DOTFILES=$HOME/.dotfiles
 # your project folder that we can `c [tab]` to
 # todo export PROJECTS=~/code
 
+#######
+# Up-front dotfiles configuration
+# Not part of `load_dotfiles` because it must be sourced before anything else
+# to be sure that commands like `brew` (when installed in a custom location)
+# are already added to the PATH.
+[ -r $HOME/.dotfilesrc ] && source $HOME/.dotfilesrc;
+#
+# todo export PATH=.git/safe/../../bin:./bin:$HOME/.dotfiles/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:$HOME/.dotfiles/color/base16-shell
+#
+# base-16
+#BASE16_THEME="eighties"
+#BASE16_SHELL="$HOME/.dotfiles/color/base16-shell/base16-$BASE16_THEME.dark.sh"
+#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+#######
+
 # source every .bash file in this rep
-for config_file in $BASH/**/*.bash; source $config_file
+for config_file in $BASH/**/*.bash; do source $config_file; done
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
-#if [[ -a ~/.localrc ]]
-#then
-#  source ~/.localrc
-#fi
+if [[ -a ~/.bash_profile.local ]]
+then
+  source ~/.bash_profile.local
+fi
 
-load_dotfiles() {
 
-    declare -a files=(
-        $HOME/.rvm/scripts/rvm # Load RVM into a shell session *as a function*
-        $HOME/.dotfiles/shell/bash_config.sh # Options and Exports
-        $HOME/.dotfiles/shell/bash_aliases.sh # Aliases
 #        $HOME/.dotfiles/functions/* # Functions
-        $HOME/.dotfiles/shell/bash_prompt.sh # Custom bash prompt
-        $HOME/.dotfiles/shell/bash_paths.sh # Path modifications
 #        $(brew --prefix)/etc/bash_completion # Bash completion (installed via Homebrew)
-        $HOME/.bash_profile.local # Local and private settings not under version control (e.g. git credentials)
-    )
 
-    # if these files are readable, source them
-    for index in ${!files[*]}
-    do
-        if [[ -r ${files[$index]} ]]; then
-            source ${files[$index]}
-#			echo ${files[$index]}
-        fi
-    done
-}
-
-#todo load_dotfiles
-#unset load_dotfiles
+# initialize autocomplete here, otherwise functions won't be loaded
+# ?? autoload -U compinit
+# ?? compinit
+# load every completion after autocomplete loads
+#for config_file in $BASH/**/completion.sh; do source $config_file; done

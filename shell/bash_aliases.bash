@@ -1,13 +1,11 @@
 #!/bin/bash
 
-# bash_aliases
-
 # my own
 alias x="exit"
 
 alias cls='clear'
 
-alias lastfm='shell-fm'
+alias reinst!='cd ~/.dotfiles && . ~/.dotfiles/script/bootstrap.s'
 alias reload!='. ~/.bashrc'
 alias count='wc -l'
 alias tft='curl "http://itsthisforthat.com/api.php?text"'
@@ -20,19 +18,15 @@ alias ..='cd ..'
 alias ...="cd ../.."
 alias ~="cd ~"
 alias -- -="cd -"
+alias ..dot='cd ~/.dotfiles'
 
 # ls
 # ref: http://ss64.com/osx/ls.html
-#alias ls="ls -F"		# List mit Typisierung am Ende
 alias l="ls -oG"		# Long form no user group, color
-#alias l='ls -la'
-#alias l="ls -lAh"		# Long, incl .files, unit suffix
 alias ll="ls -l"		# Long
-#alias la='ls -A'		# Incl .files
-alias la="ls -AGFoh"	# List all except . and ..., color, mark file types, long form no user group, file size
+alias la="ls -AGFoh"	# List all, color, mark file types, long form no user group, file size
 alias lr="ls -RA"		# List recursive incl. .files
-#alias lt="ls -toG"		# Order by last modified, long form no user group, color
-#alias lat="ls -AGFoth"	# List all except . and ..., color, mark file types, long form no user group, order by last modified, file size
+alias ls="ls -F"		# List mit Typisierung am Ende
 
 # find
 #alias find_source='find . -type f -not -path "*/target/*" -not -path "*/.svn/*" -not -path "*/.git/*" -not -name ".DS_Store" -not -iname "*.jar" -not -iname "*.gif" -not -iname "*.jpg" -not -iname "*.png"'
@@ -73,23 +67,4 @@ alias sudo="sudo "
 
 # Concatenate and print content of files (add line numbers)
 alias catn="cat -n"
-
-# Open file in existing MacVim window
-alias gvim="open -a MacVim"
-alias mvim="open -a MacVim"
-
-# IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="ipconfig getifaddr en1"
-alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\)\|[a-fA-F0-9:]\+\)' | sed -e 's/inet6* //'"
-
-# Copy my public key to the pasteboard
-alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | printf '=> Public key copied to pasteboard.\n'"
-
-# Flush DNS cache
-alias flushdns="dscacheutil -flushcache"
-
-# Empty the Trash on all mounted volumes and the main HDD
-# Also, clear Apple’s System Logs to improve shell startup speed
-alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
 

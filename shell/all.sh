@@ -7,5 +7,5 @@ set -e
 #  chsh -s /bin/bash
 #fi
 
-echo "Setting shell color scheme"
-sh color/base16-shell/base16-eighties.dark.sh
+#echo "Setting shell color scheme"
+#sh color/base16-shell/base16-eighties.dark.sh

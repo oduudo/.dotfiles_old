@@ -22,6 +22,29 @@ alias ..dot='cd ~/.dotfiles'
 
 # ls
 # ref: http://ss64.com/osx/ls.html
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+	alias l='ls -oG --color=auto'
+    alias ll='ls -l --color=auto'
+	alias la='ls -AGFoh --color=auto'
+	alias lr='ls -RA --color=auto'
+	alias ls='ls -F --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+else
+	alias l='ls -oG --color=auto'		# Long form no user group, color
+	alias ll='ls -l --color=auto'		# Long
+	alias la="ls -AGFoh"	# List all, color, mark file types, long form no user group, file size
+	alias lr="ls -RA"		# List recursive incl. .files
+	alias ls="ls -F"		# List mit Typisierung am Ende
+fi
+
 alias l="ls -oG"		# Long form no user group, color
 alias ll="ls -l"		# Long
 alias la="ls -AGFoh"	# List all, color, mark file types, long form no user group, file size
